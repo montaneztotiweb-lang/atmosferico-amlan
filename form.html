@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relevamiento — Atmosférico A.M. LAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+  <!-- Netlify detecta este formulario oculto al hacer deploy -->
+  <form name="relevamiento-amlan" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="nombre_empresa">
+    <input name="anos_experiencia">
+    <input name="ubicacion">
+    <input name="habilitaciones">
+    <input name="cantidad_camiones">
+    <input name="tiempo_respuesta">
+    <input name="diferencial">
+    <input name="servicios">
+    <input name="servicio_principal">
+    <input name="horarios">
+    <input name="zonas_externas">
+    <input name="tipo_clientes">
+    <input name="zonas_destacar">
+    <input name="estilo">
+    <input name="web_referencia">
+    <input name="transmitir">
+    <input name="testimonios">
+    <input name="mensaje_principal">
+    <input name="precios">
+    <input name="trabajo_destacado">
+    <input name="objetivo_web">
+    <input name="formulario_contacto">
+    <input name="telefonos">
+    <input name="medios_pago">
+    <input name="logo_formato">
+    <input name="mail_acceso">
+    <input name="autorizacion">
+  </form>
+
+  <div class="fapp" id="app">
+
+    <!-- Header -->
+    <header class="fapp__header">
+      <a href="index.html" class="fapp__logo-link">
+        <img src="img/logo.png" alt="A.M. LAN" class="fapp__logo">
+      </a>
+      <div class="fapp__progress-wrap" id="js-progress-wrap" style="display:none">
+        <div class="fapp__progress-bar" id="js-progress"></div>
+      </div>
+      <span class="fapp__progress-label" id="js-progress-label"></span>
+    </header>
+
+    <!-- ===== PANTALLA BIENVENIDA ===== -->
+    <div class="screen" id="screen-welcome">
+      <div class="screen__inner screen__inner--center">
+        <div class="welcome">
+          <div class="welcome__icon" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke="#E6B800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="welcome__title">Contanos sobre tu negocio</h1>
+          <p class="welcome__desc">
+            Este formulario nos ayuda a construir tu sitio web de la mejor manera posible.
+            Son <strong>27 preguntas</strong> y podés pausar y volver cuando quieras — tu progreso se guarda automáticamente.
+          </p>
+          <p class="welcome__time">⏱ Tiempo estimado: 10 a 15 minutos</p>
+          <div class="welcome__actions">
+            <button class="btn-primary" id="btn-start">Comenzar</button>
+            <button class="btn-resume" id="btn-resume" style="display:none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              Continuar donde lo dejé
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANTALLA PREGUNTA ===== -->
+    <div class="screen" id="screen-question" style="display:none">
+      <div class="screen__inner">
+
+        <div class="q-meta">
+          <span class="q-section" id="js-section"></span>
+          <span class="q-counter" id="js-counter"></span>
+        </div>
+
+        <div class="q-wrap" id="js-question-wrap">
+          <!-- Renderizado por JS -->
+        </div>
+
+        <div class="q-nav">
+          <button class="q-nav__prev" id="js-prev" aria-label="Pregunta anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Anterior
+          </button>
+          <button class="q-nav__next" id="js-next">
+            Siguiente
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== PANTALLA GRACIAS ===== -->
+    <div class="screen" id="screen-thanks" style="display:none">
+      <div class="screen__inner screen__inner--center">
+        <div class="thanks">
+          <div class="thanks__check" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#E6B800" stroke-width="1.5"/>
+              <path d="M8 12l3 3 5-5" stroke="#E6B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h2 class="thanks__title">¡Listo, recibimos tus respuestas!</h2>
+          <p class="thanks__desc">Gracias por tomarte el tiempo. Vamos a revisar todo y te contactamos pronto para coordinar los próximos pasos.</p>
+          <p class="thanks__contact">
+            Cualquier duda escribinos por WhatsApp:<br>
+            <a href="https://wa.me/5492233422297" class="thanks__link" target="_blank" rel="noopener noreferrer">+54 9 223 342-2297</a>
+          </p>
+          <a href="index.html" class="btn-primary" style="margin-top: 32px; display: inline-block;">Volver al sitio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANTALLA ERROR ===== -->
+    <div class="screen" id="screen-error" style="display:none">
+      <div class="screen__inner screen__inner--center">
+        <div class="thanks">
+          <h2 class="thanks__title" style="color:#ff6b6b">Ocurrió un error al enviar</h2>
+          <p class="thanks__desc">No te preocupes, tus respuestas están guardadas. Intentá enviarlas de nuevo o escribinos directamente.</p>
+          <button class="btn-primary" id="btn-retry" style="margin-top: 24px">Reintentar envío</button>
+          <a href="https://wa.me/5492233422297" class="btn-resume" style="margin-top: 12px; display: inline-flex;" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /fapp -->
+
+  <script>
+  (function () {
+    'use strict';
+
+    var STORAGE_KEY = 'amlan_form_answers';
+    var answers     = {};
+    var current     = 0;
+    var isSubmitting = false;
+
+    /* =====================================================
+       DEFINICIÓN DE PREGUNTAS
+       ===================================================== */
+    var QUESTIONS = [
+      /* --- SECCIÓN 1: EMPRESA --- */
+      {
+        id: 'nombre_empresa', section: 'Información de la empresa',
+        type: 'text',
+        label: '¿Cómo querés que aparezca el nombre de la empresa en la web?',
+        hint: 'Ej: A.M. LAN, Atmosférico A.M. LAN, AM-LAN Servicios',
+        placeholder: 'Nombre de la empresa...'
+      },
+      {
+        id: 'anos_experiencia', section: 'Información de la empresa',
+        type: 'text',
+        label: '¿Desde cuándo están operando? ¿Cuántos años de experiencia tienen?',
+        placeholder: 'Ej: Desde 2016, 9 años de experiencia'
+      },
+      {
+        id: 'ubicacion', section: 'Información de la empresa',
+        type: 'text',
+        label: '¿Dónde están ubicados en Mar del Plata?',
+        hint: 'Barrio o dirección aproximada',
+        placeholder: 'Ej: Zona sur, barrio Florencio Sánchez...'
+      },
+      {
+        id: 'habilitaciones', section: 'Información de la empresa',
+        type: 'textarea',
+        label: '¿Tienen habilitaciones, permisos o seguros?',
+        hint: 'Municipalidad, OSSE, seguro de responsabilidad civil, etc. Mencionarlos genera mucha confianza.',
+        placeholder: 'Ej: Habilitación municipal N°..., seguro con...'
+      },
+      {
+        id: 'cantidad_camiones', section: 'Información de la empresa',
+        type: 'text',
+        label: '¿Cuántos camiones o equipos tienen disponibles actualmente?',
+        placeholder: 'Ej: 2 camiones propios'
+      },
+      {
+        id: 'tiempo_respuesta', section: 'Información de la empresa',
+        type: 'text',
+        label: 'Cuando un cliente llama, ¿cuánto tardan normalmente en responder y llegar?',
+        hint: 'Este dato es clave para diferenciarse. Sea lo más específico posible.',
+        placeholder: 'Ej: Respondemos de inmediato, llegamos en 1 a 2 horas'
+      },
+      {
+        id: 'diferencial', section: 'Información de la empresa',
+        type: 'textarea',
+        label: '¿Cuál es tu principal ventaja frente a la competencia?',
+        hint: 'Precio, rapidez, atención personalizada, equipo propio, trayectoria...',
+        placeholder: 'Contanos qué te hace diferente...'
+      },
+
+      /* --- SECCIÓN 2: SERVICIOS --- */
+      {
+        id: 'servicios', section: 'Servicios',
+        type: 'checkbox',
+        label: '¿Cuáles son los servicios que ofrecen?',
+        hint: 'Seleccioná todos los que aplican',
+        options: [
+          'Desagote de pozos ciegos',
+          'Limpieza de cámaras sépticas',
+          'Destape de cloacas',
+          'Retiro de efluentes',
+          'Servicio industrial',
+          'Pozos de ascensores'
+        ],
+        other: true
+      },
+      {
+        id: 'servicio_principal', section: 'Servicios',
+        type: 'text',
+        label: '¿Cuál es el servicio más solicitado o el que más te conviene promover?',
+        placeholder: 'Ej: Desagote de pozos ciegos'
+      },
+      {
+        id: 'horarios', section: 'Servicios',
+        type: 'text',
+        label: '¿En qué horarios trabajan normalmente?',
+        placeholder: 'Ej: Lunes a sábados de 7 a 20 hs'
+      },
+      {
+        id: 'zonas_externas', section: 'Servicios',
+        type: 'text',
+        label: '¿Atienden solo Mar del Plata o también zonas cercanas?',
+        hint: 'Mar Chiquita, Batán, General Pueyrredón, etc.',
+        placeholder: 'Ej: Solo Mar del Plata y alrededores'
+      },
+
+      /* --- SECCIÓN 3: CLIENTES Y ZONAS --- */
+      {
+        id: 'tipo_clientes', section: 'Clientes y zonas',
+        type: 'checkbox',
+        label: '¿A quiénes atienden principalmente?',
+        hint: 'Podés elegir más de uno',
+        options: [
+          'Particulares y vecinos',
+          'Consorcios y edificios',
+          'Comercios y locales',
+          'Industrias y fábricas',
+          'Constructoras',
+          'Todos por igual'
+        ]
+      },
+      {
+        id: 'zonas_destacar', section: 'Clientes y zonas',
+        type: 'textarea',
+        label: '¿Qué zonas de Mar del Plata querés destacar en la web?',
+        hint: 'Zona Sur, Alfar, Los Acantilados, Centro, otras...',
+        placeholder: 'Ej: Zona Sur, Alfar, Los Acantilados y alrededores'
+      },
+
+      /* --- SECCIÓN 4: DISEÑO --- */
+      {
+        id: 'estilo', section: 'Diseño',
+        type: 'radio',
+        label: 'De estos tres estilos, ¿cuál te representa mejor?',
+        options: [
+          'A — Directo y urgente: colores fuertes, texto grande, todo apunta a que el cliente llame ya',
+          'B — Serio y profesional: más neutro, transmite confianza y trayectoria',
+          'C — Cercano y accesible: tono amigable, fácil de leer, lenguaje simple'
+        ]
+      },
+      {
+        id: 'web_referencia', section: 'Diseño',
+        type: 'textarea',
+        label: '¿Hay algún sitio web que te guste visualmente?',
+        hint: 'Puede ser del rubro o de cualquier otro sector. No es obligatorio.',
+        placeholder: 'Pegá el link y contanos por qué te gusta...'
+      },
+      {
+        id: 'transmitir', section: 'Diseño',
+        type: 'checkbox',
+        label: '¿Qué es lo más importante que debe transmitir tu web?',
+        hint: 'Podés elegir más de uno',
+        options: [
+          'Confianza',
+          'Rapidez',
+          'Precio conveniente',
+          'Profesionalismo',
+          'Cercanía y trato personal'
+        ]
+      },
+
+      /* --- SECCIÓN 5: CONTENIDO --- */
+      {
+        id: 'testimonios', section: 'Contenido',
+        type: 'textarea',
+        label: '¿Tenés reseñas o comentarios de clientes que podamos usar?',
+        hint: 'De Google, WhatsApp o Facebook. Con nombre completo o solo iniciales.',
+        placeholder: 'Pegá los comentarios acá, o escribí "no tengo aún"...'
+      },
+      {
+        id: 'mensaje_principal', section: 'Contenido',
+        type: 'textarea',
+        label: '¿Qué mensaje querés que vea el cliente al entrar a la web?',
+        hint: 'La primera impresión que querés dar',
+        placeholder: 'Ej: Llegamos rápido a tu zona, Equipo propio y trabajo garantizado...'
+      },
+      {
+        id: 'precios', section: 'Contenido',
+        type: 'radio',
+        label: '¿Querés mostrar precios orientativos en la web?',
+        options: [
+          'Sí, quiero mostrar precios aproximados',
+          'No, prefiero que pidan presupuesto personalizado',
+          'No sé, me gustaría tu opinión'
+        ]
+      },
+      {
+        id: 'trabajo_destacado', section: 'Contenido',
+        type: 'textarea',
+        label: '¿Hay algún trabajo del que estén especialmente orgullosos?',
+        hint: 'Proyectos grandes, situaciones resueltas rápido, clientes conocidos. No es obligatorio.',
+        placeholder: 'Contanos si quieren...'
+      },
+
+      /* --- SECCIÓN 6: CONTACTO --- */
+      {
+        id: 'objetivo_web', section: 'Contacto y conversión',
+        type: 'radio',
+        label: '¿Cuál es el objetivo principal de la web?',
+        options: [
+          'Que los clientes llamen por teléfono',
+          'Que los clientes escriban por WhatsApp',
+          'Ambos por igual'
+        ]
+      },
+      {
+        id: 'formulario_contacto', section: 'Contacto y conversión',
+        type: 'radio',
+        label: '¿Querés que los clientes puedan escribir desde la web con un formulario de contacto?',
+        options: [
+          'Sí, quiero un formulario',
+          'No, solo teléfono y WhatsApp'
+        ]
+      },
+      {
+        id: 'telefonos', section: 'Contacto y conversión',
+        type: 'textarea',
+        label: '¿Qué número o números de teléfono querés mostrar?',
+        placeholder: 'Ej: 223 437-8766 (llamadas) — +54 9 223 342-2297 (WhatsApp)'
+      },
+      {
+        id: 'medios_pago', section: 'Contacto y conversión',
+        type: 'checkbox',
+        label: '¿Qué medios de pago aceptan?',
+        options: [
+          'Efectivo',
+          'Transferencia bancaria',
+          'Tarjeta de débito',
+          'Tarjeta de crédito',
+          'Mercado Pago'
+        ]
+      },
+
+      /* --- SECCIÓN 7: DATOS Y ACCESOS --- */
+      {
+        id: 'logo_formato', section: 'Datos y accesos',
+        type: 'checkbox',
+        label: '¿En qué formato tienen el logo del negocio?',
+        hint: 'Seleccioná todos los que tengan. Cuanto mayor calidad, mejor resultado en la web.',
+        options: [
+          'JPG o JPEG',
+          'PNG (fondo transparente)',
+          'SVG (vectorial)',
+          'PDF',
+          'AI o EPS (Illustrator)',
+          'Solo tengo foto del logo (sacada con el celular)'
+        ]
+      },
+      {
+        id: 'mail_acceso', section: 'Datos y accesos',
+        type: 'text',
+        label: '¿A qué correo de Gmail tienen acceso actualmente?',
+        hint: 'Lo necesitamos para vincular Google Maps e Instagram a nombre del negocio. Puede ser personal o del negocio.',
+        placeholder: 'Ej: atmosfericoamlan@gmail.com'
+      },
+      {
+        id: 'autorizacion', section: 'Datos y accesos',
+        type: 'radio',
+        label: '¿Autorizás a Creadoras3D a crear y configurar cuentas usando tu correo?',
+        hint: 'Esto incluye Google Business Profile y otras plataformas necesarias. Al finalizar el proyecto, todo queda a tu nombre y bajo tu control.',
+        options: [
+          'Sí, autorizo — entiendo que todo quedará a mi nombre',
+          'Necesito más información antes de decidir'
+        ]
+      }
+    ];
+
+    var TOTAL = QUESTIONS.length;
+
+    /* =====================================================
+       ELEMENTOS DEL DOM
+       ===================================================== */
+    var screenWelcome  = document.getElementById('screen-welcome');
+    var screenQuestion = document.getElementById('screen-question');
+    var screenThanks   = document.getElementById('screen-thanks');
+    var screenError    = document.getElementById('screen-error');
+    var progressBar    = document.getElementById('js-progress');
+    var progressLabel  = document.getElementById('js-progress-label');
+    var progressWrap   = document.getElementById('js-progress-wrap');
+    var sectionEl      = document.getElementById('js-section');
+    var counterEl      = document.getElementById('js-counter');
+    var questionWrap   = document.getElementById('js-question-wrap');
+    var btnStart       = document.getElementById('btn-start');
+    var btnResume      = document.getElementById('btn-resume');
+    var btnPrev        = document.getElementById('js-prev');
+    var btnNext        = document.getElementById('js-next');
+    var btnRetry       = document.getElementById('btn-retry');
+
+    /* =====================================================
+       LOCALSTORAGE
+       ===================================================== */
+    function saveProgress() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers: answers, current: current }));
+    }
+
+    function loadProgress() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (e) { return null; }
+    }
+
+    function clearProgress() {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    /* =====================================================
+       PANTALLAS
+       ===================================================== */
+    function showScreen(name) {
+      [screenWelcome, screenQuestion, screenThanks, screenError].forEach(function (s) {
+        s.style.display = 'none';
+      });
+      progressWrap.style.display = name === 'question' ? 'block' : 'none';
+      if (name === 'welcome')  { screenWelcome.style.display  = 'flex'; }
+      if (name === 'question') { screenQuestion.style.display = 'flex'; }
+      if (name === 'thanks')   { screenThanks.style.display   = 'flex'; }
+      if (name === 'error')    { screenError.style.display    = 'flex'; }
+    }
+
+    /* =====================================================
+       PROGRESO
+       ===================================================== */
+    function updateProgress() {
+      var pct = Math.round(((current + 1) / TOTAL) * 100);
+      progressBar.style.width = pct + '%';
+      progressLabel.textContent = (current + 1) + ' / ' + TOTAL;
+    }
+
+    /* =====================================================
+       RENDER DE PREGUNTA
+       ===================================================== */
+    function renderQuestion(index, direction) {
+      var q   = QUESTIONS[index];
+      var val = answers[q.id] || '';
+
+      sectionEl.textContent = q.section;
+      counterEl.textContent = 'Pregunta ' + (index + 1) + ' de ' + TOTAL;
+      btnPrev.style.visibility = index === 0 ? 'hidden' : 'visible';
+      btnNext.textContent = index === TOTAL - 1 ? 'Enviar respuestas' : 'Siguiente';
+      updateProgress();
+
+      var html = '';
+      html += '<div class="q-block q-block--' + (direction || 'right') + '">';
+      html += '<label class="q-label" for="q-input">' + q.label + '</label>';
+      if (q.hint) { html += '<p class="q-hint">' + q.hint + '</p>'; }
+
+      if (q.type === 'text') {
+        html += '<input class="q-input" id="q-input" type="text" placeholder="' + (q.placeholder || '') + '" value="' + escHtml(val) + '" autocomplete="off">';
+        html += '<p class="q-enter-hint">Presioná <kbd>Enter</kbd> para continuar</p>';
+
+      } else if (q.type === 'textarea') {
+        html += '<textarea class="q-input q-input--textarea" id="q-input" placeholder="' + (q.placeholder || '') + '" rows="4">' + escHtml(val) + '</textarea>';
+
+      } else if (q.type === 'radio') {
+        var radioVals = Array.isArray(val) ? val : (val ? [val] : []);
+        q.options.forEach(function (opt, i) {
+          var checked = radioVals.indexOf(opt) > -1 ? 'checked' : '';
+          html += '<label class="q-option ' + (checked ? 'q-option--selected' : '') + '">';
+          html += '<input type="radio" name="q-radio" value="' + escHtml(opt) + '" ' + checked + '>';
+          html += '<span class="q-option__key">' + String.fromCharCode(65 + i) + '</span>';
+          html += '<span class="q-option__text">' + opt + '</span>';
+          html += '</label>';
+        });
+
+      } else if (q.type === 'checkbox') {
+        var checkVals = Array.isArray(val) ? val : (val ? val.split(', ') : []);
+        q.options.forEach(function (opt, i) {
+          var checked = checkVals.indexOf(opt) > -1 ? 'checked' : '';
+          html += '<label class="q-option ' + (checked ? 'q-option--selected' : '') + '">';
+          html += '<input type="checkbox" name="q-check" value="' + escHtml(opt) + '" ' + checked + '>';
+          html += '<span class="q-option__key q-option__key--check">' + (checked ? '✓' : '') + '</span>';
+          html += '<span class="q-option__text">' + opt + '</span>';
+          html += '</label>';
+        });
+        if (q.other) {
+          var otherVal = checkVals.filter(function (v) { return q.options.indexOf(v) === -1; }).join('');
+          html += '<div class="q-other">';
+          html += '<label class="q-other__label" for="q-other-input">Otro:</label>';
+          html += '<input class="q-input q-other__input" id="q-other-input" type="text" placeholder="Especificá..." value="' + escHtml(otherVal) + '">';
+          html += '</div>';
+        }
+      }
+
+      html += '</div>';
+      questionWrap.innerHTML = html;
+
+      /* Animación entrada */
+      requestAnimationFrame(function () {
+        var block = questionWrap.querySelector('.q-block');
+        if (block) {
+          block.classList.add('q-block--visible');
+        }
+      });
+
+      bindQuestionEvents(q);
+
+      /* Focus automático */
+      var inp = document.getElementById('q-input');
+      if (inp) { setTimeout(function () { inp.focus(); }, 300); }
+    }
+
+    /* =====================================================
+       EVENTOS DE CADA PREGUNTA
+       ===================================================== */
+    function bindQuestionEvents(q) {
+      /* Enter en text → avanzar */
+      if (q.type === 'text') {
+        var inp = document.getElementById('q-input');
+        if (inp) {
+          inp.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); goNext(); }
+          });
+        }
+      }
+
+      /* Radio → guardar y avanzar automáticamente */
+      if (q.type === 'radio') {
+        var radios = questionWrap.querySelectorAll('input[type="radio"]');
+        radios.forEach(function (r) {
+          r.addEventListener('change', function () {
+            questionWrap.querySelectorAll('.q-option').forEach(function (o) { o.classList.remove('q-option--selected'); });
+            this.closest('.q-option').classList.add('q-option--selected');
+            answers[q.id] = this.value;
+            saveProgress();
+            setTimeout(goNext, 350);
+          });
+        });
+      }
+
+      /* Checkbox → actualizar estilo de selección */
+      if (q.type === 'checkbox') {
+        var checks = questionWrap.querySelectorAll('input[type="checkbox"]');
+        checks.forEach(function (c) {
+          c.addEventListener('change', function () {
+            var label = this.closest('.q-option');
+            var keyEl = label.querySelector('.q-option__key');
+            if (this.checked) {
+              label.classList.add('q-option--selected');
+              if (keyEl) keyEl.textContent = '✓';
+            } else {
+              label.classList.remove('q-option--selected');
+              if (keyEl) keyEl.textContent = '';
+            }
+          });
+        });
+      }
+    }
+
+    /* =====================================================
+       LEER RESPUESTA ACTUAL
+       ===================================================== */
+    function readCurrentAnswer() {
+      var q = QUESTIONS[current];
+
+      if (q.type === 'text') {
+        var inp = document.getElementById('q-input');
+        return inp ? inp.value.trim() : '';
+
+      } else if (q.type === 'textarea') {
+        var ta = document.getElementById('q-input');
+        return ta ? ta.value.trim() : '';
+
+      } else if (q.type === 'radio') {
+        var sel = questionWrap.querySelector('input[type="radio"]:checked');
+        return sel ? sel.value : answers[q.id] || '';
+
+      } else if (q.type === 'checkbox') {
+        var checked = Array.from(questionWrap.querySelectorAll('input[type="checkbox"]:checked')).map(function (c) { return c.value; });
+        var otherInp = document.getElementById('q-other-input');
+        if (otherInp && otherInp.value.trim()) { checked.push(otherInp.value.trim()); }
+        return checked;
+      }
+      return '';
+    }
+
+    /* =====================================================
+       NAVEGACIÓN
+       ===================================================== */
+    function goNext() {
+      var val = readCurrentAnswer();
+      answers[QUESTIONS[current].id] = val;
+      saveProgress();
+
+      if (current < TOTAL - 1) {
+        current++;
+        renderQuestion(current, 'right');
+      } else {
+        submitForm();
+      }
+    }
+
+    function goPrev() {
+      if (current === 0) return;
+      var val = readCurrentAnswer();
+      answers[QUESTIONS[current].id] = val;
+      saveProgress();
+      current--;
+      renderQuestion(current, 'left');
+    }
+
+    btnNext.addEventListener('click', goNext);
+    btnPrev.addEventListener('click', goPrev);
+
+    if (btnRetry) {
+      btnRetry.addEventListener('click', function () {
+        showScreen('question');
+        submitForm();
+      });
+    }
+
+    /* =====================================================
+       ENVÍO A NETLIFY
+       ===================================================== */
+    function submitForm() {
+      if (isSubmitting) return;
+      isSubmitting = true;
+      btnNext.textContent = 'Enviando...';
+      btnNext.disabled = true;
+
+      var body = 'form-name=relevamiento-amlan';
+      Object.keys(answers).forEach(function (key) {
+        var v = answers[key];
+        body += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(Array.isArray(v) ? v.join(', ') : v);
+      });
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      })
+      .then(function (res) {
+        if (res.ok) {
+          clearProgress();
+          showScreen('thanks');
+        } else {
+          throw new Error('server error');
+        }
+      })
+      .catch(function () {
+        isSubmitting = false;
+        btnNext.textContent = 'Enviar respuestas';
+        btnNext.disabled = false;
+        showScreen('error');
+      });
+    }
+
+    /* =====================================================
+       INICIO
+       ===================================================== */
+    function startForm(fromSaved) {
+      showScreen('question');
+      renderQuestion(current, 'right');
+    }
+
+    btnStart.addEventListener('click', function () {
+      answers = {};
+      current = 0;
+      startForm();
+    });
+
+    btnResume.addEventListener('click', function () {
+      startForm(true);
+    });
+
+    /* Comprobar progreso guardado */
+    var saved = loadProgress();
+    if (saved && Object.keys(saved.answers).length > 0) {
+      answers = saved.answers;
+      current = saved.current || 0;
+      btnResume.style.display = 'inline-flex';
+    }
+
+    showScreen('welcome');
+
+    /* =====================================================
+       UTILITARIOS
+       ===================================================== */
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

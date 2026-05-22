@@ -1,0 +1,563 @@
+/* ==============================================
+   Atmosférico A.M. LAN — form.css
+   Formulario conversacional mobile-first
+   ============================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary:      #001F3F;
+  --primary-alt:  #0A2E5C;
+  --accent:       #E6B800;
+  --accent-alt:   #FFB300;
+  --white:        #FFFFFF;
+  --gray-light:   #F4F5F7;
+  --gray-mid:     #6B7280;
+  --text:         #111827;
+  --font:         'Inter', -apple-system, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  background: var(--primary);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ==============================================
+   LAYOUT PRINCIPAL
+   ============================================== */
+
+.fapp {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ==============================================
+   HEADER
+   ============================================== */
+
+.fapp__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.fapp__logo-link { display: flex; align-items: center; flex-shrink: 0; }
+
+.fapp__logo {
+  height: 48px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+}
+
+.fapp__progress-wrap {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fapp__progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0%;
+}
+
+.fapp__progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 48px;
+  text-align: right;
+}
+
+/* ==============================================
+   PANTALLAS
+   ============================================== */
+
+.screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  min-height: 0;
+}
+
+.screen__inner {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.screen__inner--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==============================================
+   PANTALLA BIENVENIDA
+   ============================================== */
+
+.welcome {
+  text-align: center;
+  max-width: 520px;
+}
+
+.welcome__icon {
+  margin: 0 auto 24px;
+  width: 80px;
+  height: 80px;
+  background: rgba(230, 184, 0, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome__title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+@media (min-width: 640px) { .welcome__title { font-size: 34px; } }
+
+.welcome__desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+}
+
+.welcome__desc strong { color: var(--accent); font-weight: 600; }
+
+.welcome__time {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 32px;
+}
+
+.welcome__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ==============================================
+   BOTONES GLOBALES
+   ============================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  color: var(--primary);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 200ms, transform 150ms, box-shadow 200ms;
+  box-shadow: 0 4px 16px rgba(230, 184, 0, 0.35);
+}
+
+.btn-primary:hover { background: var(--accent-alt); box-shadow: 0 6px 24px rgba(230, 184, 0, 0.45); }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 200ms, color 200ms, background 200ms;
+}
+
+.btn-resume:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ==============================================
+   PANTALLA PREGUNTA
+   ============================================== */
+
+#screen-question {
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px 20px;
+  gap: 0;
+}
+
+.q-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.q-section {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.q-counter {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Wrap de pregunta */
+.q-wrap {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+/* Bloque animado */
+.q-block {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.q-block--left  { transform: translateX(-40px); }
+.q-block--right { transform: translateX(40px); }
+
+.q-block--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Label */
+.q-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+@media (min-width: 640px) { .q-label { font-size: 26px; } }
+
+/* Hint */
+.q-hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Input texto */
+.q-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 400;
+  padding: 12px 0;
+  outline: none;
+  transition: border-color 200ms;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.q-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+.q-input:focus { border-bottom-color: var(--accent); }
+
+.q-input--textarea {
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  resize: vertical;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100px;
+  margin-top: 4px;
+}
+
+.q-input--textarea:focus { border-color: var(--accent); }
+
+/* Hint enter */
+.q-enter-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 8px;
+}
+
+.q-enter-hint kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: var(--font);
+}
+
+/* Opciones radio/checkbox */
+.q-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: border-color 200ms, background 200ms;
+  user-select: none;
+}
+
+.q-option input { position: absolute; opacity: 0; pointer-events: none; }
+
+.q-option:hover { border-color: rgba(230, 184, 0, 0.5); background: rgba(230, 184, 0, 0.05); }
+
+.q-option--selected {
+  border-color: var(--accent) !important;
+  background: rgba(230, 184, 0, 0.10) !important;
+}
+
+.q-option__key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  transition: background 200ms, color 200ms, border-color 200ms;
+}
+
+.q-option--selected .q-option__key {
+  background: var(--accent);
+  color: var(--primary);
+  border-color: var(--accent);
+}
+
+.q-option__key--check {
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.q-option__text {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.45;
+  padding-top: 3px;
+}
+
+@media (min-width: 640px) { .q-option__text { font-size: 15px; } }
+
+/* Campo "Otro" */
+.q-other {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 4px 0;
+}
+
+.q-other__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.q-other__input {
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+/* ==============================================
+   NAVEGACIÓN PREGUNTA
+   ============================================== */
+
+.q-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.q-nav__prev,
+.q-nav__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 200ms, color 200ms, transform 150ms;
+}
+
+.q-nav__prev {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.q-nav__prev:hover { background: rgba(255, 255, 255, 0.10); color: var(--white); }
+
+.q-nav__next {
+  background: var(--accent);
+  color: var(--primary);
+  box-shadow: 0 4px 12px rgba(230, 184, 0, 0.3);
+  margin-left: auto;
+}
+
+.q-nav__next:hover { background: var(--accent-alt); }
+.q-nav__next:active { transform: scale(0.97); }
+.q-nav__next:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ==============================================
+   PANTALLA GRACIAS
+   ============================================== */
+
+.thanks {
+  text-align: center;
+  max-width: 480px;
+}
+
+.thanks__check {
+  margin: 0 auto 24px;
+  width: 96px;
+  height: 96px;
+  background: rgba(230, 184, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.thanks__title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.thanks__desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.thanks__contact {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+.thanks__link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.thanks__link:hover { text-decoration: underline; }
+
+/* ==============================================
+   SCROLLBAR CUSTOM (webkit)
+   ============================================== */
+
+.q-wrap::-webkit-scrollbar { width: 4px; }
+.q-wrap::-webkit-scrollbar-track { background: transparent; }
+.q-wrap::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+
+@media (min-width: 768px) {
+  .fapp__header { padding: 16px 40px; }
+  #screen-question { padding: 32px 40px 28px; }
+  .q-label { font-size: 28px; }
+  .q-option { padding: 14px 20px; }
+  .thanks__title { font-size: 30px; }
+}
+
+@media (min-width: 1024px) {
+  .screen { padding: 40px 32px; }
+  .q-label { font-size: 32px; }
+}
+
+/* Sin animaciones preferidas */
+@media (prefers-reduced-motion: reduce) {
+  .q-block { transition: none; }
+  .thanks__check { animation: none; }
+}

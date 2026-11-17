@@ -1,0 +1,2 @@
+# El subdominio de netlify redirige al dominio propio para no duplicar contenido en google
+https://atmosferico-amlan.netlify.app/* https://atmosfericosamlan.com/:splat 301!
